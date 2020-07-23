@@ -1,0 +1,12 @@
+name: shiny_dash_template
+title: shiny_dash_template
+username:
+account: dads2busy
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2603666
+bundleId: 3423870
+url: https://dads2busy.shinyapps.io/shiny_dash_template/
+when: 1595465048.15898
+asMultiple: FALSE
+asStatic: FALSE
