@@ -13,7 +13,8 @@ shinyApp(
     header = dashboardHeaderPlus(
       title = "DSPG 2020"
       ),
-    
+
+# SIDEBAR (LEFT) ----------------------------------------------------------
     sidebar = dashboardSidebar(
       sidebarMenu(
         id = "tabs",
@@ -54,7 +55,8 @@ shinyApp(
         )
       )
     ),
-    
+
+# BODY --------------------------------------------------------------------
     body = dashboardBody(
       customTheme,
       fluidPage(
@@ -231,19 +233,24 @@ shinyApp(
     ))
   ),
   
+
+# SERVER ------------------------------------------------------------------
   server = function(input, output) {
+    # Render Plot 1
     output$distPlot <- renderPlot({
       hist(rnorm(input$obs))
     })
-    
+    # Render Plot 2
     output$distPlot2 <- renderPlot({
       hist(rnorm(input$obs2))
     })
     
+    # Create Map Points 1
     points <- eventReactive(input$recalc, {
       cbind(rnorm(40) * 2 + 13, rnorm(40) + 48)
     }, ignoreNULL = FALSE)
     
+    # Render Map 1
     output$mymap <- renderLeaflet({
       leaflet() %>%
         addProviderTiles(providers$Stamen.TonerLite,
@@ -251,10 +258,12 @@ shinyApp(
         addMarkers(data = points())
     })
     
+    # Create Map Points 2
     points2 <- eventReactive(input$recalc2, {
       cbind(rnorm(40) * 2 + 13, rnorm(40) + 48)
     }, ignoreNULL = FALSE)
     
+    # Render Map 2
     output$mymap2 <- renderLeaflet({
       leaflet() %>%
         addProviderTiles(providers$Stamen.TonerLite,
