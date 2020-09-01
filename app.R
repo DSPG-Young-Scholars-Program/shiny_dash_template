@@ -6,6 +6,7 @@ library(leaflet)
 library(dashboardthemes)
 library(shinyjs)
 
+# CODE TO DETECT ORIGIN OF LINK AND CHANGE LOGO ACCORDINGLY
 jscode <- "var referer = document.referrer;
            var n = referer.includes('economic');
            var x = document.getElementsByClassName('logo');
@@ -27,7 +28,9 @@ shinyApp(
     title = "DashboardPage",
 
     # HEADER ----------------------------------------------------------
-    header = dashboardHeaderPlus(),
+    header = dashboardHeaderPlus(
+      left_menu = tagList(div("Project to Verify Something Something Using Something Else plus Something...", style="height:35px; display:flex; align-items: center;"))
+    ),
     
     # SIDEBAR (LEFT) ----------------------------------------------------------
     sidebar = dashboardSidebar(
@@ -253,6 +256,7 @@ shinyApp(
   
   # SERVER ------------------------------------------------------------------
   server = function(input, output, session) {
+    # Run JavaScript Code
     runjs(jscode)
     
     # Render Plot 1
